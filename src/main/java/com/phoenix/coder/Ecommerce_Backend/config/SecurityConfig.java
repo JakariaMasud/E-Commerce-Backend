@@ -2,6 +2,7 @@ package com.phoenix.coder.Ecommerce_Backend.config;
 
 import com.phoenix.coder.Ecommerce_Backend.filters.JwtTokenGeneratorFilter;
 import com.phoenix.coder.Ecommerce_Backend.filters.JwtTokenValidatorFilter;
+import com.phoenix.coder.Ecommerce_Backend.security.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,15 +23,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig {
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http,JwtTokenValidatorFilter jwtTokenValidatorFilter) throws Exception {
+    SecurityFilterChain securityFilterChain(HttpSecurity http, JwtTokenValidatorFilter jwtTokenValidatorFilter) throws Exception {
         http.authorizeHttpRequests((authorize) -> {
             authorize.requestMatchers("/auth/login", "auth/signup").permitAll();
             authorize.anyRequest().authenticated();
         });
-        http.csrf((csrf)->{
+        http.csrf((csrf) -> {
             csrf.disable();
         });
-        http.cors((cors)->{
+        http.cors((cors) -> {
             cors.disable();
         });
         http.addFilterBefore(jwtTokenValidatorFilter, UsernamePasswordAuthenticationFilter.class);
@@ -44,28 +45,15 @@ public class SecurityConfig {
     }
 
     @Bean
-    UserDetailsManager userDetailsManager(PasswordEncoder passwordEncoder) {
-        UserDetails admin = User.withUsername("Jakaria")
-                .password(passwordEncoder().encode("26111994"))
-                .authorities(new SimpleGrantedAuthority("ADMIN"))
-                .build();
-        UserDetails user = User.withUsername("Afrin")
-                .password(passwordEncoder().encode("afrin2611"))
-                .authorities(new SimpleGrantedAuthority("USER"))
-                .build();
-        return new InMemoryUserDetailsManager(admin, user);
-    }
-
-    @Bean
-    AuthenticationProvider authenticationProvider(UserDetailsManager userDetailsManager,PasswordEncoder passwordEncoder){
+    AuthenticationProvider authenticationProvider(CustomUserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsManager);
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
         return daoAuthenticationProvider;
     }
 
     @Bean
-    AuthenticationManager authenticationManager(AuthenticationProvider authenticationProvider){
+    AuthenticationManager authenticationManager(AuthenticationProvider authenticationProvider) {
         return new ProviderManager(authenticationProvider);
     }
 

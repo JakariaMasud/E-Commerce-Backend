@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,7 +26,7 @@ public class UserModel {
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     @JsonManagedReference
     List<Address> addresses;
-    @Embedded
+    @ElementCollection
     @CollectionTable(name = "payment_info",joinColumns = @JoinColumn(name = "user_id"))
     private List<PaymentInfo>paymentInfos;
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
@@ -33,6 +35,8 @@ public class UserModel {
     @JsonManagedReference
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     List<Review> reviews;
+    @CreatedDate
     private LocalDate createdAt;
+    private String role;
 
 }

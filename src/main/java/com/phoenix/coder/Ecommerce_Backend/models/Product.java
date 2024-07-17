@@ -23,9 +23,7 @@ public class Product {
     private String description;
     private Integer price;
     private Integer discountedPrice;
-    @Embedded
     @ElementCollection
-    @Column(name = "sizes")
     private Set<Size> sizes= new HashSet<>();
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     private List<Rating>ratings;
