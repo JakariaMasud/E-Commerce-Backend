@@ -23,6 +23,7 @@ public class Product {
     private String description;
     private Integer price;
     private Integer discountedPrice;
+    private Integer discountPercent;
     @ElementCollection
     private Set<Size> sizes= new HashSet<>();
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
@@ -37,5 +38,6 @@ public class Product {
     private LocalDateTime createdAt;
     private String brand;
     private String color;
+    private Integer quantity;
 
 }
