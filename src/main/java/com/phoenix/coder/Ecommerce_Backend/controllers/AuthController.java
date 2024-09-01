@@ -1,6 +1,6 @@
 package com.phoenix.coder.Ecommerce_Backend.controllers;
 
-import com.phoenix.coder.Ecommerce_Backend.Utils.JwtUtils;
+import com.phoenix.coder.Ecommerce_Backend.utils.JwtUtils;
 import com.phoenix.coder.Ecommerce_Backend.dtos.LoginRequest;
 import com.phoenix.coder.Ecommerce_Backend.dtos.AuthResponse;
 import com.phoenix.coder.Ecommerce_Backend.dtos.SignupRequest;

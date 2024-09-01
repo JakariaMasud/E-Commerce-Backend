@@ -44,4 +44,9 @@ public class UserModelServiceImpl implements UserModelService{
     public UserModel createUser(UserModel user) {
         return userModelRepository.save(user);
     }
+
+    @Override
+    public UserModel findUserByJwt(String jwt) {
+        return null;
+    }
 }

@@ -15,6 +15,7 @@ import java.util.Optional;
 public class CartItemServiceImpl implements CartItemService{
     private UserModelService userService;
     private CartItemRepository cartItemRepository;
+
     @Override
     public CartItem createCartItem(CartItem cartItem) {
         cartItem.setQuantity(1);

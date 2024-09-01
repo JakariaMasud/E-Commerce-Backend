@@ -12,7 +12,7 @@ public interface OrderService {
     List<Order> getUserOrderHistory(Long userId);
     Order placeOrder(Long orderId);
     Order confirmOrder(Long orderId);
-    Order shippedOrder(Long orderId);
+    Order shipOrder(Long orderId);
     Order deliverOrder(Long orderId);
     Order cancelOrder(Long orderId);
     List<Order> getAllOrder();

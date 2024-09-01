@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public Order shippedOrder(Long orderId) {
+    public Order shipOrder(Long orderId) {
         return null;
     }
 

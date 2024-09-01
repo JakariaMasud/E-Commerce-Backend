@@ -1,4 +1,4 @@
-package com.phoenix.coder.Ecommerce_Backend.Utils;
+package com.phoenix.coder.Ecommerce_Backend.utils;
 
 import com.phoenix.coder.Ecommerce_Backend.constants.ApplicationConstants;
 import io.jsonwebtoken.Claims;
@@ -62,4 +62,6 @@ public class JwtUtils {
         }
         return null;
     }
+
+
 }

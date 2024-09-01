@@ -1,6 +1,6 @@
 package com.phoenix.coder.Ecommerce_Backend.filters;
 
-import com.phoenix.coder.Ecommerce_Backend.Utils.JwtUtils;
+import com.phoenix.coder.Ecommerce_Backend.utils.JwtUtils;
 import com.phoenix.coder.Ecommerce_Backend.constants.ApplicationConstants;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

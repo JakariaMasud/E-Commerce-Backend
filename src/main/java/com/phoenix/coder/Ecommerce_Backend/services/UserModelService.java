@@ -12,4 +12,5 @@ public interface UserModelService {
     public void deleteUserById(Long id);
     public UserModel updateUser(Long id,UserModel user);
     public UserModel createUser(UserModel user);
+    public UserModel findUserByJwt(String jwt);
 }

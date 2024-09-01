@@ -6,11 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Review {
     @Id
     @GeneratedValue
@@ -22,4 +26,5 @@ public class Review {
     @ManyToOne
     @JsonBackReference
     private UserModel user;
+    private LocalDateTime createdAt;
 }
