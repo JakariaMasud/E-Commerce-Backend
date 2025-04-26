@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Embeddable
 public class PaymentInfo {
     private String cardHolderName;
     private String cardNumber;

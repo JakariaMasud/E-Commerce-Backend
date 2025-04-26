@@ -23,15 +23,9 @@ public class UserModel {
     private String email;
     private String password;
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    @JsonManagedReference
     List<Address> addresses;
-    @ElementCollection
-    @CollectionTable(name = "payment_info",joinColumns = @JoinColumn(name = "user_id"))
-    private List<PaymentInfo>paymentInfos;
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    @JsonManagedReference
     List<Rating> ratings;
-    @JsonManagedReference
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     List<Review> reviews;
     @CreatedDate

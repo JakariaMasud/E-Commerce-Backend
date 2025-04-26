@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Embeddable
 public class PaymentDetails {
     private String paymentMethod;
     private String paymentStatus;

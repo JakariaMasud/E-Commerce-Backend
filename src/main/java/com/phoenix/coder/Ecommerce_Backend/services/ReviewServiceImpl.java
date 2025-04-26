@@ -5,8 +5,10 @@ import com.phoenix.coder.Ecommerce_Backend.models.Product;
 import com.phoenix.coder.Ecommerce_Backend.models.Review;
 import com.phoenix.coder.Ecommerce_Backend.models.UserModel;
 import com.phoenix.coder.Ecommerce_Backend.repositories.ReviewRepository;
+import com.phoenix.coder.Ecommerce_Backend.specifications.ReviewSpecification;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -33,6 +35,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public List<Review> getProductReviews(Long productId) {
-        return reviewRepository.getProductRatings(productId);
+        Specification<Review> spec = ReviewSpecification.hasProductId(productId);
+        return reviewRepository.findAll(spec);
     }
 }

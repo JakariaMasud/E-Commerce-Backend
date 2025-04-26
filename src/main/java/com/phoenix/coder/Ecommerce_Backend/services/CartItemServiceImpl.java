@@ -5,9 +5,12 @@ import com.phoenix.coder.Ecommerce_Backend.models.CartItem;
 import com.phoenix.coder.Ecommerce_Backend.models.Product;
 import com.phoenix.coder.Ecommerce_Backend.models.UserModel;
 import com.phoenix.coder.Ecommerce_Backend.repositories.CartItemRepository;
+import com.phoenix.coder.Ecommerce_Backend.specifications.CartItemSpecifications;
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,7 +23,6 @@ public class CartItemServiceImpl implements CartItemService{
     public CartItem createCartItem(CartItem cartItem) {
         cartItem.setQuantity(1);
         cartItem.setPrice(cartItem.getPrice());
-        cartItem.setDiscountedPrice(cartItem.getProduct().getDiscountedPrice());
         CartItem savedCartItem = cartItemRepository.save(cartItem);
         return savedCartItem;
     }
@@ -31,18 +33,11 @@ public class CartItemServiceImpl implements CartItemService{
         UserModel user = userService.getUserById(userId);
         if(item.getUserId().equals(userId)){
             item.setQuantity(cartItem.getQuantity());
-            item.setPrice(item.getProduct().getPrice()* item.getQuantity());
-            item.setDiscountedPrice(item.getProduct().getDiscountedPrice()* item.getQuantity());
             return cartItemRepository.save(item);
         }
-
         return null;
     }
 
-    @Override
-    public CartItem isCartItemExist(Cart cart, Product product, String size, Long userId) {
-        return cartItemRepository.isCartItemExist(cart,product,size,userId);
-    }
 
     @Override
     public Void removeCartItem(Long cartItemId, Long userId) {
@@ -58,9 +53,18 @@ public class CartItemServiceImpl implements CartItemService{
     @Override
     public CartItem findCartItemById(Long cartItemId) {
         Optional<CartItem> cartItem = cartItemRepository.findById(cartItemId);
-        if(cartItem.isPresent()){
-            return cartItem.get();
-        }
+        if(cartItem.isPresent()) return cartItem.get();
         return null;
+    }
+
+    @Override
+    public CartItem findByCartAndProductVariant(Long cartId, Long productVariantId) {
+        CartItem cartItem=cartItemRepository.findByCart_IdAndProductVariant_Id(cartId, productVariantId);
+        return cartItem;
+    }
+
+    @Override
+    public List<CartItem> findCartItemsByCartId(Long cartId) {
+        return cartItemRepository.findByCart_Id(cartId);
     }
 }

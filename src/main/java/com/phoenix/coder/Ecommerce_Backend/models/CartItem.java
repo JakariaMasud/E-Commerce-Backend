@@ -20,11 +20,8 @@ public class CartItem {
     @ManyToOne
     private Cart cart;
     @ManyToOne
-    @JsonBackReference
-    Product product;
-    private String size;
+    ProductVariant productVariant;
     private Integer quantity;
     private Integer price;
-    private Integer discountedPrice;
     private Long userId;
 }

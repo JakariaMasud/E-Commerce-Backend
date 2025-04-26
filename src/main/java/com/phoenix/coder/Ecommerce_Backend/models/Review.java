@@ -8,6 +8,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -21,10 +22,9 @@ public class Review {
     private Long id;
     private String review;
     @ManyToOne
-    @JsonBackReference
     private Product product;
     @ManyToOne
-    @JsonBackReference
     private UserModel user;
+    @CreatedDate
     private LocalDateTime createdAt;
 }

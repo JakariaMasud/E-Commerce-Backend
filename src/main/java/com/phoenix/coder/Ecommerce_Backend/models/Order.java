@@ -19,18 +19,15 @@ public class Order {
     private Long id;
     private Long orderId;
     @ManyToOne
-    @JsonBackReference
     private UserModel user;
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
     private LocalDateTime orderDate;
     private LocalDateTime deliveryDate;
+    @OneToOne
     private Address shippingAddress;
-    @ElementCollection
-    private PaymentDetails paymentDetails;
     private Double totalPrice;
     private Integer totalDiscountedPrice;
-    private Integer discount;
     private String orderStatus;
     private  Integer totalItems;
 

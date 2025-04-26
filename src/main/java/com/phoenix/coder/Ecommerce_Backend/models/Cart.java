@@ -17,14 +17,10 @@ public class Cart {
     @GeneratedValue
     private Long id;
     @OneToOne
-    @JsonBackReference
     private UserModel user;
     @OneToMany(mappedBy = "cart")
     private Set<CartItem> cartItems;
     private Integer totalPrice;
     private Integer totalItems;
-    private Integer totalDiscountedPrice;
     private Integer totalDiscount;
-
-
 }

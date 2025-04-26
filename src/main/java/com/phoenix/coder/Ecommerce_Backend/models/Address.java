@@ -19,7 +19,6 @@ public class Address {
     private String state;
     private String zip;
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "user_id")
     private UserModel user;
 }

@@ -26,8 +26,7 @@ public class CartController {
     @PostMapping("/add")
     ResponseEntity<Cart> addItemToCart(@RequestHeader("Authorization") String jwt, CartItemRequest request){
         UserModel user = userModelService.findUserByJwt(jwt);
-        Cart cart = cartService.findUserCart(user.getId());
-        Cart updatedCart=cartService.addCartItem(user.getId(),request);
+        Cart updatedCart=cartService.addToCart(user.getId(),request);
         return new ResponseEntity<>(updatedCart,HttpStatus.CREATED);
     }
 }

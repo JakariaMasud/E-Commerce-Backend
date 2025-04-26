@@ -2,6 +2,7 @@ package com.phoenix.coder.Ecommerce_Backend.controllers;
 
 import com.phoenix.coder.Ecommerce_Backend.dtos.ApiResponse;
 import com.phoenix.coder.Ecommerce_Backend.dtos.ProductRequest;
+import com.phoenix.coder.Ecommerce_Backend.dtos.VariantRequest;
 import com.phoenix.coder.Ecommerce_Backend.models.Product;
 import com.phoenix.coder.Ecommerce_Backend.services.ProductService;
 import lombok.AllArgsConstructor;
@@ -13,20 +14,20 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/admin/products")
-public class AdminProductController {
+public class AdminProductController{
     private ProductService productService;
 
     @GetMapping("/")
     ResponseEntity<List<Product>> getAllProducts(){
-        List<Product> products = productService.getAllProduct();
-        return new ResponseEntity<>(products,HttpStatus.OK);
+        return new ResponseEntity<>(productService.getProducts(), HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    ResponseEntity<Product> createProduct(@RequestBody ProductRequest request){
-        Product product=productService.addProduct(request);
-        return new ResponseEntity<>(product, HttpStatus.CREATED);
+    ResponseEntity<Product> createProduct(@RequestBody ProductRequest productRequest){
+        Product savedProduct=productService.addProduct(productRequest);
+        return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
+
 
     @DeleteMapping("/{productId}/delete")
     ResponseEntity<ApiResponse> deleteProduct(@PathVariable Long productId){
@@ -39,9 +40,9 @@ public class AdminProductController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    @PutMapping("/update/{productId}")
-    ResponseEntity<Product> updateProduct(@RequestBody Product product,@PathVariable Long productId){
-        Product updatedProduct=productService.updateProduct(productId,product);
+    @PutMapping("/update/{productId}/")
+    ResponseEntity<Product> updateProduct(@RequestBody ProductRequest request,@PathVariable Long productId){
+        Product updatedProduct=productService.updateProduct(request,productId);
         return new ResponseEntity<>(updatedProduct,HttpStatus.OK);
     }
 }

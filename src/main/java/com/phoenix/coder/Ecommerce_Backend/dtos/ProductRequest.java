@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ProductRequest {
-    private String title;
-    private String topLevelCategory;
-    private String secondLevelCategory;
-    private String thirdLevelCategory;
+public class ProductRequest{
+    private String name;
+    private String description;
+    private List<VariantRequest> variants;
 }
+

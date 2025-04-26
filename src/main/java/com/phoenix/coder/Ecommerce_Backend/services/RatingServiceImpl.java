@@ -5,7 +5,9 @@ import com.phoenix.coder.Ecommerce_Backend.models.Product;
 import com.phoenix.coder.Ecommerce_Backend.models.Rating;
 import com.phoenix.coder.Ecommerce_Backend.models.UserModel;
 import com.phoenix.coder.Ecommerce_Backend.repositories.RatingRepository;
+import com.phoenix.coder.Ecommerce_Backend.specifications.RatingSpecification;
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +30,6 @@ public class RatingServiceImpl implements RatingService{
 
     @Override
     public List<Rating> getProductRatings(Long productId) {
-        return ratingRepository.getProductRatings(productId);
-    }
+        Specification<Rating> spec = RatingSpecification.hasProductId(productId);
+        return ratingRepository.findAll(spec);    }
 }
